@@ -10,3 +10,4 @@ six==1.10.0
 static3==0.6.1
 virtualenv==14.0.1
 wheel==0.26.0
+whitenoise==2.0.6
