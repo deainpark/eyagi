@@ -1,0 +1,11 @@
+{% block content %}
+	<h1> create account </h1>
+	<form action = "" method ="post">
+	<table>
+	{% csrf_token %}
+	{{form.as_table}}
+	
+	</table>
+	<input type = "submit" value ="create">
+	</form>
+{% endblock %}
