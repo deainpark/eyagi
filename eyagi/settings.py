@@ -117,7 +117,6 @@ LOGIN_REDIRECT_URL='/index/'
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-=======
 
 import dj_database_url
 
