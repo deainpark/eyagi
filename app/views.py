@@ -150,9 +150,9 @@ def Emailsending(request):
     sub = 'requirement accept email'
     frommail = 'admin@eyagi.com'
     if request.method == "POST":
-        if request.POST.get_key('email'):
+        if request.POST.has_key('email'):
             email = request.POST['email']
-        if request.POST.get_key('message'):
+        if request.POST.has_key('message'):
             message = request.POST['message']
         send_mail(sub, message, frommail, [email])
         return HttpResponse("sending")
