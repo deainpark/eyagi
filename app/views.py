@@ -149,9 +149,9 @@ def Emailsending(request):
     user = UserInfo.objects.filter(user=request.user)
     
     if request.POST.get_key('email'):
-        email = request.POST['email']
+        email = request.POST.get('email','')
     if request.POST.get_key('message'):
-        message = request.POST['message']
+        message = request.POST.get('message','')
         
     sub = 'requirement accept email'
     
