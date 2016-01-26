@@ -147,11 +147,11 @@ def Search(request):
 
 def Emailsending(request):
     user = UserInfo.objects.filter(user=request.user)
-    
-    if request.POST.get_key('email'):
-        email = request.POST.get('email','')
-    if request.POST.get_key('message'):
-        message = request.POST.get('message','')
+    if request.method == "POST":
+        if request.POST.get_key('email'):
+            email = request.POST['email']
+        if request.POST.get_key('message'):
+            message = request.POST['message']
         
     sub = 'requirement accept email'
     frommail = 'admin@eyagi.com'
