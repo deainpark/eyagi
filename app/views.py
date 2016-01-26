@@ -156,8 +156,8 @@ def Emailsending(request):
             message = request.POST['message']
         
         send_mail(sub, message, frommail, [email])
-        
         return HttpResponse("sending")
+    return HttpResponse("sending")
 
 @login_required(login_url='/index/login/')
 def EmailAccept(request):
