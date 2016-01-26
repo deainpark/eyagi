@@ -154,11 +154,15 @@ def Emailsending(request):
             email = request.POST['email']
         if request.POST.get_key('message'):
             message = request.POST['message']
-        
         send_mail(sub, message, frommail, [email])
         return HttpResponse("sending")
     else:
         return HttpResponse("sending mail fail")
+    
+    return render(request,'userinfo.html',
+                  {
+                   'user':user
+                   })
 
 @login_required(login_url='/index/login/')
 def EmailAccept(request):
