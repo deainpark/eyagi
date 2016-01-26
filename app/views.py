@@ -146,7 +146,7 @@ def Search(request):
                   )
 
 def Emailsending(request):
-    user = UserInfo.objects.get(user=request.user)
+    user = UserInfo.objects.all().filter(user=request.user)
     email = request.POST['email']
     sub = 'requirement accept email'
     message = request.POST['message']
