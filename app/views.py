@@ -148,7 +148,7 @@ def Search(request):
 def Emailsending(request):
     user = UserInfo.objects.filter(user=request.user)
     sub = 'requirement accept email'
-    frommail = 'admin@eyagi.com'
+    frommail = 'farloking@email.com'
     if request.method == "POST":
         if request.POST.has_key('email'):
             email = request.POST['email']
