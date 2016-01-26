@@ -154,10 +154,10 @@ def Emailsending(request):
         message = request.POST.get('message','')
         
     sub = 'requirement accept email'
-    
+    frommail = 'admin@eyagi.com'
     
     if sub and message:
-        send_mail(sub, message, 'admin@eyagi.com', [email])
+        send_mail(sub, message, frommail, [email])
         
         return HttpResponse("sending")
 
