@@ -147,13 +147,14 @@ def Search(request):
 
 def Emailsending(request):
     user = UserInfo.objects.get(user=request.user)
-    sub = 'this'
-    message = 'hi'
+    email = request.POST['email']
+    sub = 'requirement accept email'
+    message = request.POST['message']
     
     if sub and message:
-        send_mail(sub, message, 'admin@eyagi.com', [user.user.email])
+        send_mail(sub, message, 'admin@eyagi.com', [email])
         
-        return HttpResponseRedirect('/index')
+        return HttpResponse("sending")
 
 @login_required(login_url='/index/login/')
 def EmailAccept(request):

@@ -8,6 +8,13 @@
 <div>
 	{{count}}
 	{{user.email}}
+	
+	<form method = "POST" action="/index/email/">
+	{% csrf_token %}
+	<input type='hidden' name="email" value="{{user.email}}"/>
+	<input type='hidden' name="message" value="https://eyagisite.herokuapp.com/index/emailaccept"/>
+	<p><input type ="submit" value="comment"/></p>
+</form>
 </div>
 </body>
 </html>
