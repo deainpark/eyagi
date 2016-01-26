@@ -162,12 +162,3 @@ def EmailAccept(request):
     userinfo.save()
         
     return HttpResponseRedirect("/index/")
-    
-def db(request):
-
-  greeting = Greeting()
-  greeting.save()
-
-  greetings = Greeting.objects.all()
-
-  return render(reqeust, 'db.html', {'greeting':greetings})
