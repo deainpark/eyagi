@@ -156,8 +156,6 @@ def Emailsending(request):
             message = request.POST['message']
         send_mail(sub, message, frommail, [email])
         return HttpResponse("sending")
-    else:
-        return HttpResponse("sending mail fail")
     
     return render(request,'userinfo.html',
                   {
