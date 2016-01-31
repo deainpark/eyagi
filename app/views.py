@@ -175,8 +175,6 @@ def Emailsending(request):
     sub = 'requirement accept email'
     frommail = 'farloking@email.com'
     if request.method == "POST":
-        if request.POST.has_key('email'):
-            email = request.POST['email']
         if request.POST.has_key('message'):
             message = request.POST['message']
         user.email_user(sub, message)
