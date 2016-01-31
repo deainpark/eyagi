@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect,\
     render_to_response
+from django.contrib.auth import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from app.models import *
@@ -17,12 +18,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse  
 from django.core.mail import send_mail  
 
-def logouts(request):
+def Logouts(request):
     logout(request)
     
     return render(request, "login.html")
 
-def register(request):
+def Register(request):
     
     if request.method == 'POST':
         forms = CreateUser(request.POST)
@@ -35,9 +36,10 @@ def register(request):
         
     return render(request, "register.html",{'form': forms})
 
+#사용자
 @login_required(login_url='/index/login/')
 def User_Info(request):
-    user = UserInfo.objects.all().filter(user=request.user)
+    user = UserInfo.objects.filter(user=request.user)
     postcount = Post.objects.all().filter(user=request.user)
     count = len(postcount)
     
@@ -45,9 +47,31 @@ def User_Info(request):
                                        'count':count,
                                        'user':user,
                                        } )
+@login_required(login_url='/index/login/')
+def User_Change(request):
+	if request.method == 'POST':
+		if request.POST.has_key('nickname'):
+			nickname = request.POST['nickname']
+		if request.POST.has_key('aftersay'):
+			aftersay = request.POST['aftersay']
+
+		user = UserInfo(nickname = nickname, aftersay = aftersay)
+		user.user = request.user
+		user.save()
+		return HttpResponse('changed')
+
+@login_required(login_url='/index/login/')	
+def Password_Change(request):
+	user = User.objects.get(username=request.username)
+	if request.method == 'POST': 
+		if request.POST.has_key('password'):
+			password = request.POST['password']
+			user.set_password(password)
+			user.save()
+			return HttpResponse('changed')
 
 
-def index(request):
+def Index(request):
     posts = Post.objects.all().order_by('-created')
     pagintor = Paginator(posts, 10)
     
@@ -65,7 +89,7 @@ def index(request):
                                        } )
 
 @login_required(login_url='/index/login/')
-def write(request):
+def Write(request):
     if request.method == 'POST':
         
         form = Postwrite(request.POST, request.FILES)
@@ -89,7 +113,7 @@ def write(request):
                    }
                   )
 @login_required(login_url='/index/login/')
-def add_comment(request):
+def Add_comment(request):
     if request.method == "POST":
         if request.POST.has_key('comment'):
             cmt = request.POST['comment']
@@ -105,7 +129,7 @@ def add_comment(request):
         return HttpResponseRedirect(re)   
     
 @login_required(login_url='/index/login/')
-def delete_comment(request,post_id, cmt_id):
+def Delete_comment(request,post_id, cmt_id):
     cmt = Comment.objects.get(pk=cmt_id)
     if cmt.user == request.user:
         cmt.delete()
@@ -145,8 +169,9 @@ def Search(request):
                   {'query':query}
                   )
 
+@login_required(login_url='/index/login/')
 def Emailsending(request):
-    user = UserInfo.objects.filter(user=request.user)
+    user = User.objects.get(username=request.username)
     sub = 'requirement accept email'
     frommail = 'farloking@email.com'
     if request.method == "POST":
@@ -154,7 +179,7 @@ def Emailsending(request):
             email = request.POST['email']
         if request.POST.has_key('message'):
             message = request.POST['message']
-        send_mail(sub, message, frommail, [email])
+        user.email_user(sub, message)
         return HttpResponse("sending")
     
     return render(request,'userinfo.html',

@@ -112,12 +112,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
-LOGIN_REDIRECT_URL='/index/'
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+#login
+LOGIN_REDIRECT_URL='/index/'
+
+#email setting
+EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'sendgrid_username'
+EMAIL_HOST_PASSWORD = 'sendgrid_password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+#database
 import dj_database_url
 
 DATABASES['default'] = dj_database_url.config()
