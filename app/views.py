@@ -60,7 +60,7 @@ def User_Change(request):
 		user.save()
 		return HttpResponse('changed')
 
-@login_required(login_url='/index/login/')	
+@login_required(login_url='/index/login/')
 def Password_Change(request):
 	user = User.objects.get(username=request.username)
 	if request.method == 'POST': 
