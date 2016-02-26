@@ -6,7 +6,7 @@
 </head>
 <body>
 	{% for q in query %}
-		<a href="/index/{{q.id}}"><p>{{q.posts}}</p></a>
+		<a href="/{{q.id}}"><p>{{q.posts}}</p></a>
 	{% endfor %}
 </body>
 </html>
