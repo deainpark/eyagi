@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'eyagi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -133,11 +133,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 #database
-
+'''
 
 import dj_database_url
 
 #===============================================================================
 DATABASES['default'] = dj_database_url.config()
 #===============================================================================
-
+'''

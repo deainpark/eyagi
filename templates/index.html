@@ -2,67 +2,87 @@
 <head>
 <meta charset="utf-8"/>
 <link rel="stylesheet" type="text/css" href="{% static 'pure-min.css'%}">
-<link rel="stylesheet" type="text/css" href="{% static 'grids-responsive-min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'side-menu.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'grids-responsive.css'%}">
 <style>
-	.search{
+	.content{
 		background-color:gray;
+		color:black;
 	}
+	p{color:white;}
+
+	body{background-color:gray;}
 </style>
 </head>
 <body>
 <div class = "layout">
-	<div class="search pure-menu">
-		<div class="l-box pure-menu-heading">
-			신규 작성 태그들:중복 표시 됩니다.
-			<div class="pure-menu pure-menu-horizontal">
-				<ul class="pure-menu-list">
-					{% for p in posts %}
-					<li class="pure-menu-item">
-						<a href="/tag/{{p.tags}}">{{p.tags}}</a>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<div>
+	<div id ="menu">
+	<div class ="pure-menu">
+		<div >
+			<span class ="step-links">
+								{% if posts.has_previous %}
+								<a href="?page={{posts.previous_page_number}}">previous</a>
+								{% endif %}
+								
+								<span class="current">
+									Page {{posts.number}} of {{posts.paginator.num_pages}}
+								</span>
+								
+								{% if posts.has_next %}
+								<a href="?page={{posts.next_page_number}}">next</a>
+								{% endif %}
+								
+			</span>
+		</div>		
+		<div class ="search">
 			<form class="pure-form" method = "GET" action="/search/">
-				<input type ="text" name="search"/>
-				<input type ="submit" value="search"/>
+				<input type ="text" name="search"/>				
 			</form>
 		</div>
+		<a class ="pure-menu-heading">EYAGI</a>
+		<ul class = "pure-menu-list">
+			<li >
+				<a class = "pure-menu-link" href = '/write/'>포스트쓰기</a>
+			</li>
+			<li>
+				<a class = "pure-menu-link" href = '/register/'>회원가입</a>
+			</li>
+			<li >
+				<a class = "pure-menu-link" href = '/login/'>로그인</a>
+			</li>
+			<li>
+				<a class = "pure-menu-link" href = '/logout/'>로그아웃</a>
+			</li>
+		</ul>
+		</br>
+		<a class ="pure-menu-heading">TAG</a>
+		<ul class = "pure-menu-list">
+				{% for p in posts %}
+				<li >
+				<a class = "pure-menu-link" href="/tag/{{p.tags}}">
+				{{p.tags}}
+				</a>
+				</li>
+				{% endfor %}
+		</ul>
 	</div>
-	<div class = "content">
-		<div class="pure-g">
-				<div >
-					{% for p in posts %}
-						<div class="title">
-						<a href= "/{{p.id}}"><p>title:{{p.title}}</p></a>
-						<p>사용자:{{p.user}}</p>
-						<p>사용자:{{p.user.email}}</p>
-						</div>
-					{% endfor %}
+	</div>
+	<div id = "main">
+		<div class="content">
+				<div class ="pure-g">
+					<div class ="pure-u-1-4"></div>
+					<div class ="pure-u-1-4">
+						{% for p in posts %}
+							<div class="title">
+							<a href= "/{{p.id}}"><p>title:{{p.title}}</p></a>
+							<p>사용자:{{p.user}}</p>
+							<p>사용자:{{p.user.email}}</p>
+							</div>
+						{% endfor %}
+					</div>
+					<div class ="pure-u-1-4"></div>
+					<div class ="pure-u-1-4"></div>
 				</div>
-				<div>
-					<button class="button-c pure-button" type="button" onclick = "location.href = '/write/'">글쓰기</button>
-					<button class="button-c pure-button" type='button' onclick = "location.href = '/register/'">회원가입</button>
-					<button class="button-c pure-button" type='button' onclick = "location.href = '/login/'">로그인</button>
-					<button class="button-c pure-button" type='button' onclick = "location.href = '/logout/'">로그아웃</button>
-				</div>
-		</div>
-		<div>
-				<span class ="step-links">
-						{% if posts.has_previous %}
-						<a href="?page={{posts.previous_page_number}}">previous</a>
-						{% endif %}
-						
-						<span class="current">
-							Page {{posts.number}} of {{posts.paginator.num_pages}}
-						</span>
-						
-						{% if posts.has_next %}
-						<a href="?page={{posts.next_page_number}}">next</a>
-						{% endif %}
-				</span>
 		</div>
 	</div>
 </div>

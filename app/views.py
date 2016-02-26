@@ -37,7 +37,7 @@ def Register(request):
     return render(request, "register.html",{'form': forms})
 
 #사용자
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def User_Info(request):
     user = UserInfo.objects.filter(user=request.user)
     postcount = Post.objects.all().filter(user=request.user)
@@ -47,7 +47,7 @@ def User_Info(request):
                                        'count':count,
                                        'user':user,
                                        } )
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def User_Change(request):
 	if request.method == 'POST':
 		if request.POST.has_key('nickname'):
@@ -60,7 +60,7 @@ def User_Change(request):
 		user.save()
 		return HttpResponse('changed')
 
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def Password_Change(request):
 	user = User.objects.get(username=request.username)
 	if request.method == 'POST': 
@@ -88,7 +88,7 @@ def Index(request):
                                        'posts':ps,
                                        } )
 #포스트 작성
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def Write(request):
     if request.method == 'POST':
         
@@ -113,7 +113,7 @@ def Write(request):
                    }
                   )
 #코멘트 작성
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def Add_comment(request):
     if request.method == "POST":
         if request.POST.has_key('comment'):
@@ -130,7 +130,7 @@ def Add_comment(request):
         return HttpResponseRedirect(re)   
 
 #코멘트 삭제    
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def Delete_comment(request,post_id, cmt_id):
     cmt = Comment.objects.get(pk=cmt_id)
     if cmt.user == request.user:
@@ -173,7 +173,7 @@ def Search(request):
                   )
 
 #메일 전송
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def Emailsending(request):
     user = User.objects.get(username=request.username)
     sub = 'requirement accept email'
@@ -189,7 +189,7 @@ def Emailsending(request):
                    })
 
 #메일 인증
-@login_required(login_url='/index/login/')
+@login_required(login_url='/login/')
 def EmailAccept(request):
     userinfo = UserInfo(user = request.user,emailaccept = True )
     try:
