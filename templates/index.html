@@ -18,14 +18,14 @@
 				<ul class="pure-menu-list">
 					{% for p in posts %}
 					<li class="pure-menu-item">
-						<a href="/index/tag/{{p.tags}}">{{p.tags}}</a>
+						<a href="/tag/{{p.tags}}">{{p.tags}}</a>
 					</li>
 					{% endfor %}
 				</ul>
 			</div>
 		</div>
 		<div class="pure-u-1-3">
-			<form class="pure-form" method = "GET" action="/index/search/">
+			<form class="pure-form" method = "GET" action="/search/">
 				<input type ="text" name="search"/>
 				<input type ="submit" value="search"/>
 			</form>
@@ -36,17 +36,17 @@
 				<div >
 					{% for p in posts %}
 						<div class="title">
-						<a href= "/index/{{p.id}}"><p>title:{{p.title}}</p></a>
+						<a href= "/{{p.id}}"><p>title:{{p.title}}</p></a>
 						<p>사용자:{{p.user}}</p>
 						<p>사용자:{{p.user.email}}</p>
 						</div>
 					{% endfor %}
 				</div>
 				<div>
-					<button class="button-c pure-button" type="button" onclick = "location.href = '/index/write/'">글쓰기</button>
-					<button class="button-c pure-button" type='button' onclick = "location.href = '/index/register/'">회원가입</button>
-					<button class="button-c pure-button" type='button' onclick = "location.href = '/index/login/'">로그인</button>
-					<button class="button-c pure-button" type='button' onclick = "location.href = '/index/logout/'">로그아웃</button>
+					<button class="button-c pure-button" type="button" onclick = "location.href = '/write/'">글쓰기</button>
+					<button class="button-c pure-button" type='button' onclick = "location.href = '/register/'">회원가입</button>
+					<button class="button-c pure-button" type='button' onclick = "location.href = '/login/'">로그인</button>
+					<button class="button-c pure-button" type='button' onclick = "location.href = '/logout/'">로그아웃</button>
 				</div>
 		</div>
 		<div>
