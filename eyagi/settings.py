@@ -111,13 +111,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-ADMIN_MEDIA_PREFIX = 'static/admin'
+STATIC_URL = '/eyagi/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'eyagi/static')
+ADMIN_MEDIA_PREFIX = 'eyagi/static/admin'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    '/static/',
+    os.path.join(BASE_DIR, "eyagi/static"),
+    '/eyagi/static/',
 )
 #login
 LOGIN_REDIRECT_URL='/index/'
