@@ -65,21 +65,15 @@
 	</div>
 	</div>
 	<div id = "main">
+		<div class ="header">
+			<h1>포스트 목록</h1>
+		</div>
 		<div class="content">
-				<div class ="pure-g">
-					<div class ="pure-u-1-4"></div>
-					<div class ="pure-u-1-4">
-						{% for p in posts %}
-							<div class="title">
-							<a href= "/{{p.id}}"><p>title:{{p.title}}</p></a>
-							<p>사용자:{{p.user}}</p>
-							<p>사용자:{{p.user.email}}</p>
-							</div>
-						{% endfor %}
-					</div>
-					<div class ="pure-u-1-4"></div>
-					<div class ="pure-u-1-4"></div>
-				</div>
+			{% for p in posts %}
+				<a href= "/{{p.id}}"><p>title:{{p.title}}</p></a>
+				<p>사용자:{{p.user}}</p>
+				<p>사용자:{{p.user.email}}</p>
+			{% endfor %}
 		</div>
 	</div>
 </div>
