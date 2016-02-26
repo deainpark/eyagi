@@ -22,6 +22,9 @@ from django.contrib import admin
 from app import views
 from django.contrib.auth import views as auth_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/', auth_views.login, {'template_name':'login.html'},name='login'),
@@ -38,4 +41,4 @@ urlpatterns = [
     url(r'^write/$', views.Write, name = 'write'),
     url(r'^comment/$', views.Add_comment, name = 'comment'),
     url(r'^cmt/delete/(?P<post_id>\d+)/(?P<cmt_id>\d+)/$', views.Delete_comment),
-]
+] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

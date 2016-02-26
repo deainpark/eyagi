@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from django.conf.global_settings import PASSWORD_HASHERS, LOGIN_REDIRECT_URL,\
-    EMAIL_BACKEND
+    EMAIL_BACKEND, STATICFILES_FINDERS, STATICFILES_DIRS, STATIC_ROOT
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -110,15 +110,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-ADMIN_MEDIA_PREFIX = 'static/admin'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    '/static/',
-)
+print BASE_DIR, STATIC_ROOT
+STATICFILES_FINDERS=(
+                     'django.contrib.staticfiles.finders.FileSystemFinder',
+                     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+                     
+                     )
 #login
 LOGIN_REDIRECT_URL='/index/'
 
