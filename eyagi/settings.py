@@ -111,8 +111,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = 'app/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'app/static')
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #login
 LOGIN_REDIRECT_URL='/index/'
