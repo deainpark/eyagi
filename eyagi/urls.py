@@ -37,5 +37,5 @@ urlpatterns = [
     url(r'^index/$', views.Index),
     url(r'^index/write/$', views.Write, name = 'write'),
     url(r'^index/comment/$', views.Add_comment, name = 'comment'),
-    url(r'^index/cmt/delete/(?P<post_id>\d+)/(?P<cmt_id>\d+)/$', views.delete_comment),
+    url(r'^index/cmt/delete/(?P<post_id>\d+)/(?P<cmt_id>\d+)/$', views.Delete_comment),
 ]

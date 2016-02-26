@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect,\
     render_to_response
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from app.models import *
@@ -70,7 +70,7 @@ def Password_Change(request):
 			user.save()
 			return HttpResponse('changed')
 
-
+#인덱스
 def Index(request):
     posts = Post.objects.all().order_by('-created')
     pagintor = Paginator(posts, 10)
@@ -87,7 +87,7 @@ def Index(request):
     return render_to_response("index.html",{
                                        'posts':ps,
                                        } )
-
+#포스트 작성
 @login_required(login_url='/index/login/')
 def Write(request):
     if request.method == 'POST':
@@ -112,6 +112,7 @@ def Write(request):
                     'form':form,
                    }
                   )
+#코멘트 작성
 @login_required(login_url='/index/login/')
 def Add_comment(request):
     if request.method == "POST":
@@ -127,7 +128,8 @@ def Add_comment(request):
         re = "/index/%s/" %pid
         
         return HttpResponseRedirect(re)   
-    
+
+#코멘트 삭제    
 @login_required(login_url='/index/login/')
 def Delete_comment(request,post_id, cmt_id):
     cmt = Comment.objects.get(pk=cmt_id)
@@ -136,7 +138,8 @@ def Delete_comment(request,post_id, cmt_id):
     
     re= "/index/%s/" %post_id
     return HttpResponseRedirect(re) 
-    
+ 
+#포스트 보기   
 def ViewPost(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
     cmt = Comment.objects.all().filter(post=post_id)
@@ -148,10 +151,9 @@ def ViewPost(request, post_id):
                      'cmt':cmt,
                     }
                   )
-    
+#태그 보기   
 def ViewTag(request, tag):
     tg = Post.objects.all().filter(tags=tag)
-    
     
     return render(request, 
                   'tag.html',
@@ -159,7 +161,8 @@ def ViewTag(request, tag):
                    'tag':tg
                    }
                   )
-    
+
+#검색    
 def Search(request):
     qs= request.GET.get('search')
     query = Post.objects.filter(Q(title__icontains=qs))
@@ -169,11 +172,11 @@ def Search(request):
                   {'query':query}
                   )
 
+#메일 전송
 @login_required(login_url='/index/login/')
 def Emailsending(request):
     user = User.objects.get(username=request.username)
     sub = 'requirement accept email'
-    frommail = 'farloking@email.com'
     if request.method == "POST":
         if request.POST.has_key('message'):
             message = request.POST['message']
@@ -185,10 +188,13 @@ def Emailsending(request):
                    'user':user
                    })
 
+#메일 인증
 @login_required(login_url='/index/login/')
 def EmailAccept(request):
     userinfo = UserInfo(user = request.user,emailaccept = True )
-
-    userinfo.save()
-        
+    try:
+        userinfo.save()
+    except Exception as e:
+        pass
+     
     return HttpResponseRedirect("/index/")
