@@ -21,20 +21,47 @@ from django.core.mail import send_mail
 def Logouts(request):
     logout(request)
     
-    return render(request, "login.html")
+    return HttpResponseRedirect("/login/")
+
+def LoginCheck(request):
+    if request.user.is_authenticated():
+        return True
+    else:
+        return False
 
 def Register(request):
-    
+    warm=""
+    if request.method == 'POST':
+        if request.POST.has_key('username'):
+            name = request.POST['username']
+        if request.POST.has_key('email'):
+            email = request.POST['email']
+        if request.POST.has_key('password1'):
+            password1 = request.POST['password1']
+        if request.POST.has_key('password2'):
+            password2 = request.POST['password2']
+            
+        if password1 == password2:
+            if User.objects.filter(username=name).exists() or User.objects.filter(email=email).exists():
+                warm="이미 존재하는 회원입니다."
+            else:
+                user = User.objects.create_user(name, email, password1)
+                user.save()          
+                return HttpResponseRedirect("/login/")
+        else:
+            warm="비밀번호가 일치하지 않습니다."
+    return render(request,'register.html', {'warm':warm,})
+        
+def RegisterForm(request):
     if request.method == 'POST':
         forms = CreateUser(request.POST)
         if forms.is_valid():
             newuser = forms.save()
             newuser.save()
-            return HttpResponseRedirect("/index/")
+            return HttpResponseRedirect("/login/")
     else:
         forms = CreateUser()
-        
-    return render(request, "register.html",{'form': forms})
+    return render(request, "register.html",{'form': forms,})
 
 #사용자
 @login_required(login_url='/login/')
@@ -71,6 +98,7 @@ def Password_Change(request):
 			return HttpResponse('changed')
 
 #인덱스
+@login_required(login_url='/login/')
 def Index(request):
     posts = Post.objects.all().order_by('-created')
     pagintor = Paginator(posts, 10)
@@ -83,10 +111,10 @@ def Index(request):
         ps = pagintor.page(1)
     except EmptyPage:
         ps = pagintor.page(pagintor.num_pages)
-    
-    return render_to_response("index.html",{
-                                       'posts':ps,
-                                       } )
+        
+    logincheck = LoginCheck(request)
+
+    return render_to_response("index.html",{'posts':ps,'check':logincheck,} )
 #포스트 작성
 @login_required(login_url='/login/')
 def Write(request):
@@ -101,7 +129,7 @@ def Write(request):
             wpost.save()
             
             
-            return HttpResponseRedirect("/index/")
+            return HttpResponseRedirect("/")
     else:
         form = Postwrite()
         
@@ -125,7 +153,7 @@ def Add_comment(request):
         newcmt.user = request.user
         newcmt.save()
         
-        re = "/index/%s/" %pid
+        re = "/%s/" %pid
         
         return HttpResponseRedirect(re)   
 
@@ -197,4 +225,4 @@ def EmailAccept(request):
     except Exception as e:
         pass
      
-    return HttpResponseRedirect("/index/")
+    return HttpResponseRedirect("/")

@@ -122,7 +122,7 @@ STATICFILES_FINDERS=(
                      
                      )
 #login
-LOGIN_REDIRECT_URL='/index/'
+LOGIN_REDIRECT_URL='/'
 
 #email setting
 EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend'

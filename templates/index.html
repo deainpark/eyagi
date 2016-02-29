@@ -38,7 +38,7 @@
 				<input type ="text" name="search"/>				
 			</form>
 		</div>
-		<a class ="pure-menu-heading">EYAGI</a>
+		<a class ="pure-menu-heading">이야기</a>
 		<ul class = "pure-menu-list">
 			<li >
 				<a class = "pure-menu-link" href = '/write/'>포스트쓰기</a>
@@ -46,15 +46,19 @@
 			<li>
 				<a class = "pure-menu-link" href = '/register/'>회원가입</a>
 			</li>
+			{% if not check %}
 			<li >
 				<a class = "pure-menu-link" href = '/login/'>로그인</a>
 			</li>
+			{% else %}
+
+			{% endif %}
 			<li>
 				<a class = "pure-menu-link" href = '/logout/'>로그아웃</a>
 			</li>
 		</ul>
 		</br>
-		<a class ="pure-menu-heading">TAG</a>
+		<a class ="pure-menu-heading">카테고리</a>
 		<ul class = "pure-menu-list">
 				{% for p in posts %}
 				<li >
@@ -67,16 +71,39 @@
 	</div>
 	</div>
 	<div id = "main">
+		
+		{% if check %}
 		<div class ="header">
-			<h1>포스트 목록</h1>
+			<h1>목록</h1>
 		</div>
 		<div class="content">
 			{% for p in posts %}
 				<a href= "/{{p.id}}"><p>title:{{p.title}}</p></a>
-				<p>사용자:{{p.user}}</p>
-				<p>사용자:{{p.user.email}}</p>
+				<p>User:{{p.user}}</p>
+				<p>Email:{{p.user.email}}</p>
 			{% endfor %}
 		</div>
+		{% else %}
+		<div class="header">
+			<p>로그인이 필요한 서비스입니다.</p>
+							{% if form.errors %}
+							<p>계정 이름과 비밀번호가 틀립니다.</p>
+							{% endif %}
+							<form class="pure-form" action ="{% url 'login' %}" method="post">
+							{% csrf_token %}
+									{{form.username.label_tag}}
+									{{form.username}}
+									{{form.password.label_tag}}
+									{{form.password}}
+								<input type="hidden" name="next" value="{{ next }}" id="password">
+								<button type="submit" class="pure-button" value="login">로그인</button>
+							</form>
+							
+			<p>혹은 회원가입하기</p>
+				<a class="pure-button" href = '/register/'>회원가입</a>
+		</div>
+		{% endif %}
+						
 	</div>
 </div>
 <script src="{% static 'js/ui.js' %}"></script>

@@ -1,10 +1,76 @@
-{% block content %}
-<form action="/write/ " method='POST'>
+{% load static %}
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="{% static 'pure-min.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'side-menu.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'grids-responsive.css'%}">
 
-	{% csrf_token %}
-	
-	{{form.as_p}}
+</head>
+<body>
+<div id = "layout">
+    <a href="#menu" id="menuLink" class="menu-link">
+    <span></span>
+    </a>
+	<div id ="menu">
+		<div class ="pure-menu">
+			<div>
+				<span class ="step-links">
+									{% if posts.has_previous %}
+									<a href="?page={{posts.previous_page_number}}">previous</a>
+									{% endif %}
+									
+									<span class="current">
+										Page {{posts.number}} of {{posts.paginator.num_pages}}
+									</span>
+									
+									{% if posts.has_next %}
+									<a href="?page={{posts.next_page_number}}">next</a>
+									{% endif %}
+									
+				</span>
+			</div>		
+		<div class ="search">
+			<form class="pure-form" method = "GET" action="/search/">
+				<input type ="text" name="search"/>				
+			</form>
+		</div>
+		<a class ="pure-menu-heading">이야기</a>
+		<ul class = "pure-menu-list">
+			<li >
+				<a class = "pure-menu-link" href = '/write/'>포스트쓰기</a>
+			</li>
+			<li>
+				<a class = "pure-menu-link" href = '/register/'>회원가입</a>
+			</li>
+			{% if not check %}
+			<li >
+				<a class = "pure-menu-link" href = '/login/'>로그인</a>
+			</li>
+			{% else %}
 
-	<input type="submit" value="submit"/>
-</form>
-{% endblock %}
+			{% endif %}
+			<li>
+				<a class = "pure-menu-link" href = '/logout/'>로그아웃</a>
+			</li>
+		</ul>
+		</br>
+		</div>
+	</div>
+	<div id = "main">
+		<div class="header"><h1>POST</h1></div>
+		
+		<div class="header">
+		<a class='pure-button' href= "/">홈</a>
+				<form class ="pure-form" action="/write/ " method='POST'>
+		
+				{% csrf_token %}
+			
+				{{form.as_p}}
+		
+				<button type="submit" class="pure-button" value="login">글올리기</button>
+				</form>
+		</div>
+	</div>
+</div>
+<script src="{% static 'js/ui.js' %}"></script>
+</body>

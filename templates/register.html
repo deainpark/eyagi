@@ -1,11 +1,30 @@
-{% block content %}
-	<h1> create account </h1>
-	<form action = "" method ="post">
-	<table>
-	{% csrf_token %}
-	{{form.as_table}}
-	
-	</table>
-	<input type = "submit" value ="create">
-	</form>
-{% endblock %}
+{% load static %}
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="{% static 'pure-min.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'side-menu.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'grids-responsive.css'%}">
+</head>
+<body>
+	<div class="i header" >
+	</div>
+	<div id="head" class="header">
+			
+		<h1> 회원가입 </h1>
+		{{warm}}
+		<form class="pure-form"action ="" method ="post">
+			<table class ="pure-table">
+			
+				{% csrf_token %}
+
+				<p><input type="text" id="username" name="username"/></p>
+				<p><input type="email" id="email" name="email"/></p>
+				<p><input type="text" id="password1" name="password1"/></p>
+				<p><input type="text" id="password2" name="password2"/></p>
+			</table>
+			<p>물론 자기만의 비밀번호를 사용하는 것은 자유입니다. 
+			하지만 더 복잡한 비밀번호는 안전한 웹생활을 보장합니다.</p>
+		<button type="submit" class="pure-button">create</button>
+		</form>
+	</div>
+</body>

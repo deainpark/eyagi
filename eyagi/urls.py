@@ -27,11 +27,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/', auth_views.login, {'template_name':'login.html'},name='login'),
+    url(r'^login/', auth_views.login, {'template_name':'index.html'},name='login'),
     url(r'^logout/', views.Logouts),
-    url(r'^register/', views.Register),
-    url(r'^userinfochange/$', views.User_Change, name = 'comment'),
-    url(r'^passwordchange/$', views.Password_Change, name = 'comment'),
+    url(r'^register/$', views.Register, name ='register'),
+    url(r'^userinfochange/$', views.User_Change, name = 'userchange'),
+    url(r'^passwordchange/$', views.Password_Change, name = 'passwordchange'),
     url(r'^search/', views.Search),
     url(r'^email/', views.Emailsending),
     url(r'^emailaccept/', views.EmailAccept),
