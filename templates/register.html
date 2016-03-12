@@ -12,15 +12,16 @@
 			
 		<h1> 회원가입 </h1>
 		{{warm}}
+		</br>
 		<form class="pure-form"action ="" method ="post">
 			<table class ="pure-table">
 			
 				{% csrf_token %}
 
-				<p><input type="text" id="username" name="username"/></p>
-				<p><input type="email" id="email" name="email"/></p>
-				<p><input type="text" id="password1" name="password1"/></p>
-				<p><input type="text" id="password2" name="password2"/></p>
+				아이디:<p><input type="text" id="username" name="username"/></p>
+				이메일:<p><input type="email" id="email" name="email"/></p>
+				비밀번호:<p><input type="text" id="password1" name="password1"/></p>
+				비밀번호 확인: <p><input type="text" id="password2" name="password2"/></p>
 			</table>
 			<p>물론 자기만의 비밀번호를 사용하는 것은 자유입니다. 
 			하지만 더 복잡한 비밀번호는 안전한 웹생활을 보장합니다.</p>

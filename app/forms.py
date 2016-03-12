@@ -15,7 +15,7 @@ from django.contrib.auth.forms import UserCreationForm
 class Postwrite(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'image', 'posts', 'tags',)
+        fields = ('title', 'image', 'posts',)
         
         
 class CreateUser(UserCreationForm):

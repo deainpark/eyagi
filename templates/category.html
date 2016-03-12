@@ -5,8 +5,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	{% for t in tag %}
-		<a href="/{{t.id}}"><p>{{t.title}}</p></a>
+	{% for p in posts %}
+		<a href="/{{p.id}}"><p>{{p.title}}</p></a>
 	{% endfor %}
 </body>
 </html>

@@ -10,7 +10,18 @@ class UserInfo(models.Model):
     emailaccept= models.BooleanField(default=False)
     
     def __unicode__(self):
-        return '' + self.nickname
+        return ''+ self.nickname
+
+class Tag(models.Model):
+    tags = models.TextField(max_length=100)
+
+    def __unicode__(self):
+        return ''+ self.tags
+
+class Category(models.Model):
+    category  = models.CharField(max_length=100)
+    def __unicode__(self):
+        return ''+ self.category
 
 class Post(models.Model):
     user = models.ForeignKey(User)
@@ -18,16 +29,18 @@ class Post(models.Model):
     image = models.ImageField(upload_to = '%y/%m/%d', blank = True)
     posts = models.TextField(max_length = 2000)
     created = models.DateTimeField(auto_now_add=True)
-    tags = models.CharField(max_length = 500)
+    taged  = models.ManyToManyField(Tag, null=True, blank=True)
+
+    #category = models.ForeignKey(Category)
 
     def __unicode__(self):
-        return '' + self.title
-    
+        return ''+ self.title
+
 class Comment(models.Model):
     user = models.ForeignKey(User)
     post = models.ForeignKey(Post)
     comment = models.TextField(max_length= 20)
 
     def __unicode__(self):
-        return '' + self.comment
-    
+        return ''+ self.comment
+

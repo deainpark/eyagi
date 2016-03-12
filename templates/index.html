@@ -11,6 +11,9 @@
 </style>
 </head>
 <body>
+<div>
+	<p>코드보기 : https://github.com/deainpark/ </p>
+</div>
 <div id = "layout">
     <a href="#menu" id="menuLink" class="menu-link">
     <span></span>
@@ -58,9 +61,9 @@
 			</li>
 		</ul>
 		</br>
-		<a class ="pure-menu-heading">카테고리</a>
+		<a class ="pure-menu-heading">태그</a>
 		<ul class = "pure-menu-list">
-				{% for p in posts %}
+				{% for p in tag %}
 				<li >
 				<a class = "pure-menu-link" href="/tag/{{p.tags}}">
 				{{p.tags}}

@@ -23,12 +23,6 @@ def Logouts(request):
     
     return HttpResponseRedirect("/login/")
 
-def LoginCheck(request):
-    if request.user.is_authenticated():
-        return True
-    else:
-        return False
-
 def Register(request):
     warm=""
     if request.method == 'POST':
@@ -51,7 +45,13 @@ def Register(request):
         else:
             warm="비밀번호가 일치하지 않습니다."
     return render(request,'register.html', {'warm':warm,})
-        
+
+def Password(request, ps):
+    if len(ps) < 8:
+        return False
+    else:
+        return True
+'''
 def RegisterForm(request):
     if request.method == 'POST':
         forms = CreateUser(request.POST)
@@ -62,7 +62,7 @@ def RegisterForm(request):
     else:
         forms = CreateUser()
     return render(request, "register.html",{'form': forms,})
-
+'''
 #사용자
 @login_required(login_url='/login/')
 def User_Info(request):
@@ -101,38 +101,45 @@ def Password_Change(request):
 @login_required(login_url='/login/')
 def Index(request):
     posts = Post.objects.all().order_by('-created')
+    tag = Tag.objects.all()
     pagintor = Paginator(posts, 10)
-    
     page = request.GET.get('page')
-    
     try:
         ps = pagintor.page(page)
     except PageNotAnInteger:
         ps = pagintor.page(1)
     except EmptyPage:
         ps = pagintor.page(pagintor.num_pages)
-        
     logincheck = LoginCheck(request)
 
-    return render_to_response("index.html",{'posts':ps,'check':logincheck,} )
+    return render_to_response("index.html",{'posts':ps,'tag':tag,'check':logincheck,} )
+
+def LoginCheck(request):
+    if request.user.is_authenticated():
+        return True
+    else:
+        return False
+
 #포스트 작성
 @login_required(login_url='/login/')
 def Write(request):
     if request.method == 'POST':
-        
         form = Postwrite(request.POST, request.FILES)
-        
+        if request.POST.has_key('tag'):
+            tg = request.POST['tag']
         if form.is_valid():
             wpost = form.save(commit = False)
             wpost.user = request.user
-
             wpost.save()
-            
-            
+            wtag = Tag(tags=tg)
+            wtag.save()
+
+            wpost.taged.add(wtag)
             return HttpResponseRedirect("/")
+
     else:
         form = Postwrite()
-        
+
     return render(
                   request,
                   'write.html',
@@ -165,31 +172,30 @@ def Delete_comment(request,post_id, cmt_id):
         cmt.delete()
     
     re= "/index/%s/" %post_id
-    return HttpResponseRedirect(re) 
+    return HttpResponseRedirect(re)
  
 #포스트 보기   
 def ViewPost(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
     cmt = Comment.objects.all().filter(post=post_id)
-    
+    tg  = Tag.objects.filter(post__id=post_id)
     return render(request,
                     'posts.html', 
                     {
                      'post':post,
                      'cmt':cmt,
+                    'tag':tg,
                     }
                   )
-#태그 보기   
+
 def ViewTag(request, tag):
-    tg = Post.objects.all().filter(tags=tag)
-    
+    ct = Post.objects.filter(taged__tags__startswith=tag)
     return render(request, 
-                  'tag.html',
+                  'tags.html',
                   {
-                   'tag':tg
+                   'tags':ct
                    }
                   )
-
 #검색    
 def Search(request):
     qs= request.GET.get('search')
@@ -220,9 +226,6 @@ def Emailsending(request):
 @login_required(login_url='/login/')
 def EmailAccept(request):
     userinfo = UserInfo(user = request.user,emailaccept = True )
-    try:
-        userinfo.save()
-    except Exception as e:
-        pass
-     
+    userinfo.save()
+
     return HttpResponseRedirect("/")

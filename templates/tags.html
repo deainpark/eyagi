@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	{% for p in tags %}
+		<a href="/{{p.id}}"><p>{{p.title}}</p></a>
+	{% endfor %}
+</body>
+</html>

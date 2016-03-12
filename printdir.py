@@ -1,3 +1,6 @@
-import eyagi.settings as se
+from app.models import *
+from app.forms import *
 
-print se.STATICFILES_DIRS
+p = Post.objects.all()
+
+print p.taged.tags

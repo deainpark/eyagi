@@ -70,12 +70,13 @@ textarea{
 					<a class='pure-button' href= "/">홈</a>
 			</div>
 			<div class="header">
-				
+
 					<p>타이틀:{{post.title}}</p>
 					<p>생성일자:{{post.created}}</p>
-					<p>카테고리:<a href="/tag/{{post.tags}}">{{post.tags}}</a></p>
 					<p>포스트:{{post.posts}}</p>
-
+			{% for t in tag %}
+					<p>태그:{{t.tags}}</p>
+			{% endfor %}
 			{% for c in cmt %}	
 						<p>코맨트 : <br>{{c.comment}}</p>
 						<p>post_id<br>{{c.post.id}}</p>
