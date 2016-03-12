@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5318a90-ca3c-4a96-be12-965752ad83e0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/posts.html" afterPath="$PROJECT_DIR$/templates/posts.html" />
     </list>
     <ignored path="eyagi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,12 +72,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35330072">
-              <caret line="80" column="56" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+            <state vertical-scroll-proportion="-8.576923">
+              <caret line="67" column="67" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="67" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="posts.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/posts.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6760391">
+              <caret line="77" column="79" selection-start-line="77" selection-start-column="79" selection-end-line="77" selection-end-column="79" />
+              <folding>
+                <element signature="n#style#0;n#textarea#0;n#p#0;n#form#0;n#div#2;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,7 +148,6 @@
         <option value="$PROJECT_DIR$/templates/category.html" />
         <option value="$PROJECT_DIR$/app/admin.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/templates/posts.html" />
         <option value="$PROJECT_DIR$/templates/write.html" />
         <option value="$PROJECT_DIR$/printdir.py" />
         <option value="$PROJECT_DIR$/templates/tags.html" />
@@ -144,6 +155,7 @@
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/eyagi/settings.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/posts.html" />
       </list>
     </option>
   </component>
@@ -549,6 +561,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#p#0;n#form#0;n#div#2;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -627,6 +642,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="91" column="31" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="90" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#p#0;n#form#0;n#div#2;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -988,13 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/posts.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90766823">
-          <caret line="92" column="90" selection-start-line="92" selection-start-column="12" selection-end-line="92" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tags.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1063,9 +1074,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35330072">
-          <caret line="80" column="56" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+        <state vertical-scroll-proportion="-8.576923">
+          <caret line="67" column="67" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="67" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/posts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6760391">
+          <caret line="77" column="79" selection-start-line="77" selection-start-column="79" selection-end-line="77" selection-end-column="79" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#p#0;n#form#0;n#div#2;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
