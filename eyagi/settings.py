@@ -133,7 +133,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 #database
-
+'''
 import dj_database_url
 
 DATABASES['default'] = dj_database_url.config()
+'''
