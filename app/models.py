@@ -29,7 +29,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to = '%y/%m/%d', blank = True)
     posts = models.TextField(max_length = 2000)
     created = models.DateTimeField(auto_now_add=True)
-    taged  = models.ManyToManyField(Tag, null=True, blank=True)
+    taged  = models.ManyToManyField(Tag)
 
     #category = models.ForeignKey(Category)
 
