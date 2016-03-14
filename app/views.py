@@ -127,6 +127,8 @@ def Write(request):
         form = Postwrite(request.POST, request.FILES)
         if request.POST.has_key('tag'):
             tg = request.POST['tag']
+            if tg is "":
+                tg = "태그없음"
         if form.is_valid():
             wpost = form.save(commit = False)
             wpost.user = request.user
