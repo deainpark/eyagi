@@ -139,12 +139,12 @@ def Write(request):
             if not Tag.objects.filter(tags=tg).exists():
                 wtag = Tag(tags=tg)
                 wtag.save()
-                wtag.post.add(wpost)
+                wtag.posts.add(wpost)
             else:
                 wtag_id = Tag.objects.filter(tags=tg)
                 wtag = Tag.objects.get(pk=wtag_id)
                 wtag.save()
-                wtag.post.add(wpost)
+                wtag.posts.add(wpost)
                 
             return HttpResponseRedirect("/")
 
