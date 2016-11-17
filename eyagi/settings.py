@@ -127,7 +127,8 @@ EMAIL_USE_TLS = True
 
 #database
 #오프라인작업할때 아래 코드를 주석처리해둘것
-
+'''
 import dj_database_url
 
 DATABASES['default'] = dj_database_url.config()
+'''

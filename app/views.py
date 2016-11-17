@@ -189,7 +189,7 @@ def Delete_comment(request,post_id, cmt_id):
 def ViewPost(request, post_id):
     post = get_object_or_404(Post, pk = post_id)
     cmt = Comment.objects.all().filter(post=post_id)
-    tg  = Tag.objects.filter(post__id=post_id)
+    tg  = Tag.objects.filter(posts__id=post_id)
     return render(request,
                     'posts.html', 
                     {
@@ -201,7 +201,7 @@ def ViewPost(request, post_id):
 
 def ViewTag(request, tag):
     ct = Tag.objects.get(pk=tag)
-    ctlist = ct.post.all()
+    ctlist = ct.posts.all()
     return render(request, 
                   'tags.html',
                   {
