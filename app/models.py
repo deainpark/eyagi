@@ -12,12 +12,6 @@ class UserInfo(models.Model):
     def __unicode__(self):
         return ''+ self.nickname
 
-class Tag(models.Model):
-    tags = models.TextField(max_length=100)
-
-    def __unicode__(self):
-        return ''+ self.tags
-
 class Category(models.Model):
     category  = models.CharField(max_length=100)
     def __unicode__(self):
@@ -29,13 +23,18 @@ class Post(models.Model):
     image = models.ImageField(upload_to = '%y/%m/%d', blank = True)
     posts = models.TextField(max_length = 2000)
     created = models.DateTimeField(auto_now_add=True)
-    taged  = models.ManyToManyField(Tag)
 
     #category = models.ForeignKey(Category)
 
     def __unicode__(self):
         return ''+ self.title
-
+    
+class Tag(models.Model):
+    tags = models.CharField(max_length=100)
+    post = models.ManyToManyField(Post)
+    def __unicode__(self):
+        return ''+ self.tags
+    
 class Comment(models.Model):
     user = models.ForeignKey(User)
     post = models.ForeignKey(Post)

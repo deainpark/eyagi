@@ -4,16 +4,16 @@
 <link rel="stylesheet" type="text/css" href="{% static 'pure-min.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'side-menu.css'%}">
 <link rel="stylesheet" type="text/css" href="{% static 'grids-responsive.css'%}">
+
 <style>
 
 	p{color:black;}
 
 </style>
-</head>
-<body>
-<div>
 
-</div>
+</head>
+
+<body>
 <div id = "layout">
     <a href="#menu" id="menuLink" class="menu-link">
     <span></span>
@@ -65,7 +65,7 @@
 		<ul class = "pure-menu-list">
 				{% for p in tag %}
 				<li >
-				<a class = "pure-menu-link" href="/tag/{{p.tags}}">
+				<a class = "pure-menu-link" href="/tag/{{p.id}}">
 				{{p.tags}}
 				</a>
 				</li>

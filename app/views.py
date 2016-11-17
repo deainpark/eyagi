@@ -74,6 +74,7 @@ def User_Info(request):
                                        'count':count,
                                        'user':user,
                                        } )
+    
 @login_required(login_url='/login/')
 def User_Change(request):
 	if request.method == 'POST':
@@ -134,10 +135,17 @@ def Write(request):
             wpost = form.save(commit = False)
             wpost.user = request.user
             wpost.save()
-            wtag = Tag(tags=tg)
-            wtag.save()
-
-            wpost.taged.add(wtag)
+            
+            if not Tag.objects.filter(tags=tg).exists():
+                wtag = Tag(tags=tg)
+                wtag.save()
+                wtag.post.add(wpost)
+            else:
+                wtag_id = Tag.objects.filter(tags=tg)
+                wtag = Tag.objects.get(pk=wtag_id)
+                wtag.save()
+                wtag.post.add(wpost)
+                
             return HttpResponseRedirect("/")
 
     else:
@@ -192,11 +200,12 @@ def ViewPost(request, post_id):
                   )
 
 def ViewTag(request, tag):
-    ct = Post.objects.filter(taged__tags__startswith=tag)
+    ct = Tag.objects.get(pk=tag)
+    ctlist = ct.post.all()
     return render(request, 
                   'tags.html',
                   {
-                   'tags':ct
+                   'tags':ctlist,
                    }
                   )
 #검색    

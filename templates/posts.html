@@ -75,7 +75,7 @@ textarea{
 					<p>생성일자:{{post.created}}</p>
 					<p>포스트:{{post.posts}}</p>
 			{% for t in tag %}
-					<p>태그:<a class = "pure-menu-link" href="/tag/{{t.tags}}">{{t.tags}}</a></p>
+					<p>태그:<a class = "pure-menu-link" href="/tag/{{t.id}}">{{t.tags}}</a></p>
 			{% endfor %}
 			{% for c in cmt %}	
 						<p>코맨트 : <br>{{c.comment}}</p>

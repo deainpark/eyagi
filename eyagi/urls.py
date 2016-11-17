@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^email/', views.Emailsending),
     url(r'^emailaccept/', views.EmailAccept),
     url(r'^(?P<post_id>\d+)/$', views.ViewPost),
-    url(r'^tag/(?P<tag>\w+)/$', views.ViewTag),
+    url(r'^tag/(?P<tag>\d+)/$', views.ViewTag),
     url(r'^$', views.Index),
     url(r'^write/$', views.Write, name = 'write'),
     url(r'^comment/$', views.Add_comment, name = 'comment'),
